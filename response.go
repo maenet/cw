@@ -31,7 +31,7 @@ type GetStatusResponse struct {
 	MytaskNum      int `json:"mytask_num"`
 }
 
-type ListTasksResponse []struct {
+type ListMyTasksResponse []struct {
 	TaskID int `json:"task_id"`
 	Room   struct {
 		RoomID   int    `json:"room_id"`
