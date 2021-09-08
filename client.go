@@ -71,11 +71,18 @@ func (c *Client) callAPI(ctx context.Context, method string, pathstr string, bod
 
 	res, err := c.HTTPClient.Do(req)
 	if err != nil {
-		return err
+		return fmt.Errorf("request failed: %w", err)
 	}
 
+	// TODO ハンドリング
+	// 成功: 200
+	// APIトークンが不正: Unauthorized 401
+	// エンドポイントが不正: Not Found 404
+	// リクエスト数リミット: Too Many Request 429
+	// それ以外の何か
+
 	if err := decodeBody(res, &responseBody); err != nil {
-		return err
+		return fmt.Errorf("failed to decode response body: %w", err)
 	}
 
 	return nil
@@ -83,8 +90,10 @@ func (c *Client) callAPI(ctx context.Context, method string, pathstr string, bod
 
 func (c *Client) GetAccount(ctx context.Context) (*GetAccountResponse, error) {
 	var res GetAccountResponse
-	if err := c.callAPI(ctx, http.MethodGet, "/me", nil, &res); err != nil {
+	// pathstr := "/me"
+	if err := c.callAPI(ctx, http.MethodGet, "my", nil, &res); err != nil {
 		return nil, err
+		// return nil, fmt.Errorf("failed to call api %v: %w", pathstr, err)
 	}
 	return &res, nil
 }
