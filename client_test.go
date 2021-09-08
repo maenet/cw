@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/go-chi/chi/v5"
 )
 
 func TestNewClient(t *testing.T) {
@@ -37,4 +39,23 @@ func TestRequestHeader(t *testing.T) {
 	client, _ := NewClient(s.URL, token, nil)
 	ctx := context.Background()
 	client.GetAccount(ctx)
+}
+
+func TestGetAccount(t *testing.T) {
+	called := false
+	r := chi.NewRouter()
+	r.Get("/me", func(w http.ResponseWriter, r *http.Request) {
+		called = true
+		w.WriteHeader(200)
+	})
+	s := httptest.NewServer(r)
+	defer s.Close()
+
+	c, _ := NewClient(s.URL, "token", nil)
+	ctx := context.Background()
+	c.GetAccount(ctx)
+
+	if !called {
+		t.Fatal("api was not called")
+	}
 }

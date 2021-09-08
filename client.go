@@ -91,7 +91,7 @@ func (c *Client) callAPI(ctx context.Context, method string, pathstr string, bod
 func (c *Client) GetAccount(ctx context.Context) (*GetAccountResponse, error) {
 	var res GetAccountResponse
 	// pathstr := "/me"
-	if err := c.callAPI(ctx, http.MethodGet, "my", nil, &res); err != nil {
+	if err := c.callAPI(ctx, http.MethodGet, "me", nil, &res); err != nil {
 		return nil, err
 		// return nil, fmt.Errorf("failed to call api %v: %w", pathstr, err)
 	}
