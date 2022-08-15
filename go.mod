@@ -1,5 +1,5 @@
 module github.com/maenet/go-chatwork
 
-go 1.17
+go 1.19
 
-require github.com/go-chi/chi/v5 v5.0.4
+require github.com/google/go-querystring v1.1.0
