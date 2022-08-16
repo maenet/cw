@@ -19,7 +19,18 @@ type PostMessageResponseBody struct {
 }
 
 func (c *Client) PostMessage(ctx context.Context, roomID string, form *PostMessageForm) (*PostMessageResponseBody, error) {
+	if len(roomID) == 0 {
+		return nil, fmt.Errorf("missing room id")
+	}
 	spath := fmt.Sprintf("/rooms/%s/messages", roomID)
+
+	if form == nil {
+		return nil, fmt.Errorf("missing form")
+	}
+
+	if len(form.Body) == 0 {
+		return nil, fmt.Errorf("missing message body")
+	}
 
 	payload, err := query.Values(form)
 	if err != nil {
