@@ -10,7 +10,7 @@ import (
 )
 
 var token = flag.String("token", os.Getenv("CHATWORK_API_TOKEN"),
-	"The Chatwork API token. If not specified, the CHATWORK_API_TOKEN environment variable will be read.")
+	"The Chatwork API token. If not specified,\nthe CHATWORK_API_TOKEN environment variable will be read.")
 var selfUnread = flag.Bool("unread", false, "Make the message you send unread.")
 
 func sendmessage() error {
@@ -18,7 +18,7 @@ func sendmessage() error {
 	flag.Parse()
 
 	if flag.NArg() != 2 {
-		return fmt.Errorf("invalid arguments")
+		return fmt.Errorf("invalid arguments\nRun 'sendmessage -help' for usage.")
 	}
 	args := flag.Args()
 	roomID := args[0]
@@ -44,7 +44,7 @@ func sendmessage() error {
 func main() {
 	// TODO handle signal
 	if err := sendmessage(); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %s\n", err)
+		fmt.Fprintf(os.Stderr, "%s\n", err)
 		os.Exit(1)
 	}
 }
