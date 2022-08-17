@@ -11,7 +11,7 @@ import (
 
 type PostMessageForm struct {
 	Body       string `url:"body"`
-	SelfUnread int    `url:"self_unread,int"`
+	SelfUnread bool   `url:"self_unread,int"`
 }
 
 type PostMessageResponseBody struct {

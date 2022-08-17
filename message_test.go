@@ -49,7 +49,7 @@ func TestPostMessage(t *testing.T) {
 	ctx := context.Background()
 	form := &PostMessageForm{
 		Body:       "Hello Chatwork!",
-		SelfUnread: 0,
+		SelfUnread: false,
 	}
 	resp, err := client.PostMessage(ctx, "123", form)
 	if err != nil {
