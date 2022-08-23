@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/google/go-querystring/query"
@@ -19,10 +20,11 @@ type PostMessageResponseBody struct {
 }
 
 func (c *Client) PostMessage(ctx context.Context, roomID string, form *PostMessageForm) (*PostMessageResponseBody, error) {
-	if len(roomID) == 0 {
-		return nil, fmt.Errorf("missing room id")
+	roomIDInt, err := strconv.Atoi(roomID)
+	if err != nil || roomIDInt < 0 {
+		return nil, fmt.Errorf("roomID must be positive integer: %s", roomID)
 	}
-	spath := fmt.Sprintf("/rooms/%s/messages", roomID)
+	spath := fmt.Sprintf("/rooms/%d/messages", roomIDInt)
 
 	if form == nil {
 		return nil, fmt.Errorf("missing form")
