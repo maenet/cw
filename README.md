@@ -5,7 +5,7 @@ Go client library for the Chatwork API
 ## Installation
 
 ```
-$ go get https://github.com/maenet/go-chatwork
+$ go get github.com/maenet/go-chatwork
 ```
 
 ## Usage
