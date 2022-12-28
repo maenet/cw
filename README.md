@@ -1,16 +1,16 @@
-# go-chatwork
+# cw
 
-Go client library for the Chatwork API
+The dead simple API client & CLI for Chatwork.
 
 ## Installation
 
 ```
-$ go get github.com/maenet/go-chatwork
+$ go get github.com/maenet/cw
 ```
 
 ## Usage
 
-Please check the [example cli](https://github.com/maenet/go-chatwork/blob/main/cmd/sendmessage/main.go).
+Please check the [example cli](https://github.com/maenet/cw/blob/main/cmd/sendmessage/main.go).
 
 ## Note
 
